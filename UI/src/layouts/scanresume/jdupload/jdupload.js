@@ -11,6 +11,7 @@ import {
   Code,
   Stack,
 } from "@chakra-ui/react";
+import { Margin } from "@mui/icons-material";
 
 function JDUpload() {
   const [, setfileURL] = useState("");
@@ -119,7 +120,7 @@ function JDUpload() {
         <form onSubmit={handleUploadFile}>
           <Flex justify="center" align="center" direction="row">
 
-          <div style={{width:"500px"}}>
+          <div style={{width:"500px", Margin:"50px"}}>
               <label
                 htmlFor="jd"
                 style={{
@@ -158,21 +159,6 @@ function JDUpload() {
                     })}
                 </Flex>
               </VStack>
-              {/* <div bg="azure" p={30} borderRadius={20}>
-                <Text fontWeight="bold">Selected Job Description -</Text>
-                <Flex pb={20} direction="column">
-                  {selectedJD &&
-                    selectedJD.map((item, index) => {
-                      return (
-                        <Text key={index}>
-                          <b>{index + 1}. </b>
-                          {item.name}
-                        </Text>
-                      );
-                    })}
-                </Flex>
-
-              </div> */}
 
             </div>
 

@@ -48,6 +48,7 @@ import SignUp from "layouts/authentication/sign-up";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
+import MatchJDResume from "layouts/matchjdresume";
 
 const routes = [
   {
@@ -65,6 +66,14 @@ const routes = [
     icon: <Icon fontSize="small">person</Icon>,
     route: "/scanresume",
     component: <ScanResume />,
+  },
+  {
+    type: "collapse",
+    name: "MatchJDResume",
+    key: "matchjdresume",
+    icon: <Icon fontSize="small">MatchJDResume_view</Icon>,
+    route: "/matchjdresume",
+    component: <MatchJDResume />,
   },
   {
     type: "collapse",
