@@ -4,7 +4,7 @@
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+* Copyright 2023 CandidateBrewers (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
 
@@ -59,10 +59,10 @@ function Footer({ light }) {
             by
             <Link href="https://www.creative-tim.com/" target="_blank">
               <MDTypography variant="button" fontWeight="medium" color={light ? "white" : "dark"}>
-                &nbsp;Creative Tim&nbsp;
+                &nbsp;CandidateBrewers&nbsp;
               </MDTypography>
             </Link>
-            for a better web.
+            for a Simple Hiring with AI Recruitment.
           </MDBox>
           <MDBox
             component="ul"
@@ -88,7 +88,7 @@ function Footer({ light }) {
                   fontWeight="regular"
                   color={light ? "white" : "dark"}
                 >
-                  Creative Tim
+                  CandidateBrewers
                 </MDTypography>
               </Link>
             </MDBox>

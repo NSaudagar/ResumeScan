@@ -4,7 +4,7 @@
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+* Copyright 2023 CandidateBrewers (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
 
@@ -46,8 +46,18 @@ import DataTable from "examples/Tables/DataTable";
 import Icon from "@mui/material/Icon";
 import Menu from "@mui/material/Menu";
 
-// Data
-import ScanResult from "./scanresult";
+import MDProgress from "components/MDProgress";
+import MDBadge from "components/MDBadge";
+
+// Images
+import LogoAsana from "assets/images/small-logos/logo-asana.svg";
+import logoGithub from "assets/images/small-logos/github.svg";
+import logoAtlassian from "assets/images/small-logos/logo-atlassian.svg";
+import logoSlack from "assets/images/small-logos/logo-slack.svg";
+import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
+import logoInvesion from "assets/images/small-logos/logo-invision.svg";
+
+
 
 function MatchJDResume() {
 
@@ -66,9 +76,9 @@ function MatchJDResume() {
   const [uploadResponse, setUploadResponse] = useState(null);
   // const { columns: pColumns, rows: pRows } = ScanResult(uploadResponse);
   const datacolumns = [{ Header: "Candidate Name", accessor: "name", "width": "30%", "align": "left" },
-    { Header: "budget", accessor: "budget", align: "left" },
-    { Header: "status", accessor: "status", align: "center" },
-    { Header: "completion", accessor: "completion", align: "center" },
+    { Header: "Email ID", accessor: "email", align: "left" },
+    { Header: "Status", accessor: "status", align: "center" },
+    { Header: "Match %", accessor: "match", align: "center" },
     { Header: "action", accessor: "action", align: "center" },
   ];
   const [datarows, setdatarows] = useState([]);
@@ -95,34 +105,64 @@ function MatchJDResume() {
     setSelectedResumes(selectedResumeList);
   };
 
-  const processResponse = (data) => {
-    data.forEach(element => {
-      obj = {
-        name: <Project name="{element.key}" />,
-        budget: (
+  const Project = ({name }) => (
+    <MDBox display="flex" alignItems="center" lineHeight={1}>
+      {/* <MDAvatar src={image} name={name} size="sm" variant="rounded" /> */}
+      <MDTypography display="block" variant="button" fontWeight="medium" ml={1} lineHeight={1}>
+        {name}
+      </MDTypography>
+    </MDBox>
+  );
+
+  const Progress = ({ color, value }) => (
+    <MDBox display="flex" alignItems="center">
+      <MDTypography variant="caption" color="text" fontWeight="medium">
+        {value}%
+      </MDTypography>
+      <MDBox ml={0.5} width="9rem">
+        <MDProgress variant="gradient" color={color} value={value} />
+      </MDBox>
+    </MDBox>
+  );
+
+  function processResponse (formData) {
+    let rows = []
+
+    console.log(JSON.stringify(formData))
+
+    // data.forEach(formData => {
+
+    Object.keys(formData).forEach(fieldName => {
+
+      let record = {
+        name: <Project name={fieldName.replace('_', ' ')} />,
+        email: (
           <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            $2,500  responseData
+            {formData[fieldName]['email']}
           </MDTypography>
           
         ),
         status: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            working
-          </MDTypography>
+          // <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+          <MDBox ml={-1}>
+            <MDBadge badgeContent={formData[fieldName]['resume_matched_percentage'] > 70 ? 'Shortlisted' : 'Not Shortlisted'} color={formData[fieldName]['resume_matched_percentage'] > 70 ? 'success' : 'dark'} variant="gradient" size="sm" />
+          </MDBox>
+          // </MDTypography>
         ),
-        completion: <Progress color="info" value={60} />,
+        match: <Progress color="info" value={formData[fieldName]['resume_matched_percentage']} />,
         action: (
           <MDTypography component="a" href="#" color="text">
             <Icon>more_vert</Icon>
           </MDTypography>
         ),
       }
+      rows.push(record);
+      // console.log(fieldName, formData[fieldName]);
+    })
 
+    setdatarows(rows);
+  }
       
-    });
-    
-      
-  };
 
   // Upload file to server
   const handleUploadFile = async (ev) => {
@@ -378,7 +418,7 @@ function MatchJDResume() {
             </Card>
 
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} spacing={6}>
             <Card>
               <MDBox
                 mx={2}
